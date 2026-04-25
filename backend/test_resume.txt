@@ -1,0 +1,48 @@
+RAJESH KUMAR
+Email: rajesh.kumar@gmail.com | Phone: +91 9876543210
+LinkedIn: https://www.linkedin.com/in/rajeshkumar | GitHub: https://www.github.com/rajeshk
+
+SUMMARY
+Passionate Computer Science student with expertise in full-stack development and machine learning.
+
+EDUCATION
+B.Tech in Computer Science - XYZ University (2022-2026)
+CGPA: 8.5/10
+
+SKILLS
+Programming: Python, Java, C++, JavaScript, SQL
+Frameworks: React, Django, Flask, TensorFlow, Node.js
+Technologies: Docker, AWS, Git, MongoDB, PostgreSQL, Linux
+Core: Data Structures, Algorithms, Object Oriented Programming, Database Management
+
+EXPERIENCE
+Software Engineering Intern - ABC Tech (June 2025 - Aug 2025)
+- Developed REST APIs using Django that improved response time by 40%
+- Built a dashboard with React serving 500+ daily users
+- Implemented CI/CD pipeline using Jenkins and Docker
+
+PROJECTS
+1. AI Chatbot - Built an intelligent chatbot using Python, Flask, and TensorFlow
+   - Achieved 92% accuracy on intent classification
+   - Deployed on AWS EC2 with Docker containers
+
+2. E-Commerce Platform - Full-stack web application using React and Node.js
+   - Integrated payment gateway with Stripe API
+   - Managed database with PostgreSQL and Redis caching
+
+3. COVID Tracker - Real-time data visualization dashboard
+   - Used Python, Pandas, and Plotly for data analysis
+   - Served 1000+ users during peak pandemic period
+
+CERTIFICATIONS
+- AWS Certified Cloud Practitioner
+- Google Data Analytics Professional Certificate
+- Coursera Machine Learning by Andrew Ng
+
+ACHIEVEMENTS
+- Winner of National Hackathon 2025
+- Published research paper on NLP at IEEE conference
+- Rank 1 in university coding competition
+
+SOFT SKILLS
+Leadership, Communication, Problem Solving, Teamwork, Time Management

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyser - MNC Standard Scanner</title>
+    <meta name="description"
+        content="AI-powered resume analyser that scores your resume against top MNC standards and suggests improvements.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#g1)" />
+                        <path d="M9 10h14M9 16h10M9 22h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+                        <circle cx="24" cy="22" r="4" fill="#fff" fill-opacity="0.3" stroke="#fff" stroke-width="1.5" />
+                        <defs>
+                            <linearGradient id="g1" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6366f1" />
+                                <stop offset="1" stop-color="#a855f7" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">Resume<span class="logo-accent">ANALYSER</span></span>
+            </div>
+            <nav class="nav-pills">
+                <a href="#upload" class="pill active" id="nav-upload">Upload</a>
+                <a href="#results" class="pill" id="nav-results">Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="hero">
+                <div class="hero-badge">✨ AI-Powered Analysis</div>
+                <h1 class="hero-title">Analyse Your Resume<br><span class="gradient-text">Against MNC Standards</span>
+                </h1>
+                <p class="hero-sub">Get instant scores, identify weak areas, and receive actionable suggestions to land
+                    your dream job at top companies.</p>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num">24+</span><span class="stat-label">Companies</span></div>
+                    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Score Categories</span>
+                    </div>
+                    <div class="stat"><span class="stat-num">7</span><span class="stat-label">Domain Support</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="card upload-section" id="upload">
+                <h2 class="card-title">📄 Upload Your Resume</h2>
+                <form id="analyseForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="course">Course</label>
+                            <select id="course" required>
+                                <option value="">Select Course</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch">Branch / Domain</label>
+                            <select id="branch" required>
+                                <option value="">Select Branch</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dropzone" id="dropzone">
+                        <div class="dropzone-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M24 32V16m0 0l-6 6m6-6l6 6" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M40 32v4a4 4 0 01-4 4H12a4 4 0 01-4-4v-4" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <p class="dropzone-text">Drag & drop your resume here</p>
+                        <p class="dropzone-sub">or click to browse • PDF, DOCX, TXT, JPG, PNG & more (max 50MB)</p>
+                        <input type="file" id="resumeFile"
+                            accept=".pdf,.docx,.doc,.txt,.jpg,.jpeg,.png,.bmp,.tiff,.webp" hidden>
+                        <div class="file-info" id="fileInfo" style="display:none">
+                            <span class="file-icon">✅</span>
+                            <span id="fileName"></span>
+                            <button type="button" class="file-remove" id="fileRemove" title="Remove file">✕</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="analyseBtn">
+                        <span class="btn-text">🔍 Analyse Resume</span>
+                        <span class="btn-loading" style="display:none">
+                            <span class="spinner"></span> Analysing...
+                        </span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Loading State -->
+            <section class="card loading-section" id="loadingSection" style="display:none">
+                <div class="loading-animation">
+                    <div class="scan-line"></div>
+                    <div class="loading-icon">📄</div>
+                </div>
+                <h3>Scanning Your Resume...</h3>
+                <p class="loading-sub">Comparing against MNC standards & analysing skills</p>
+                <div class="loading-steps" id="loadingSteps">
+                    <div class="step active">Parsing document...</div>
+                    <div class="step">Extracting skills...</div>
+                    <div class="step">Scoring against MNC standards...</div>
+                    <div class="step">Generating suggestions...</div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results" style="display:none">
+                <!-- Overall Score -->
+                <div class="card score-hero" id="scoreHero">
+                    <div class="score-ring-wrapper">
+                        <svg class="score-ring" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.08)"
+                                stroke-width="12" />
+                            <circle cx="100" cy="100" r="85" fill="none" stroke="url(#scoreGrad)" stroke-width="12"
+                                stroke-linecap="round" stroke-dasharray="534" stroke-dashoffset="534" id="scoreCircle"
+                                transform="rotate(-90 100 100)" />
+                            <defs>
+                                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#a855f7" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="score-value"><span id="overallScore">0</span><small>/100</small></div>
+                    </div>
+                    <div class="score-info">
+                        <div class="grade-badge" id="gradeBadge">-</div>
+                        <h2 id="scoreTitle">Resume Score</h2>
+                        <p id="scoreDesc">Upload your resume to see results</p>
+                        <div class="parsed-info" id="parsedInfo"></div>
+                    </div>
+                </div>
+
+                <!-- Category Scores -->
+                <div class="card" id="categoryCard">
+                    <h2 class="card-title">📊 Category Breakdown</h2>
+                    <div class="categories-grid" id="categoriesGrid"></div>
+                </div>
+
+                <!-- MNC Comparison -->
+                <div class="card" id="mncCard">
+                    <h2 class="card-title">🏢 MNC Readiness</h2>
+                    <p class="card-sub">How your resume compares against top company standards</p>
+                    <div class="mnc-grid" id="mncGrid"></div>
+                </div>
+
+                <!-- Company Selection Chances -->
+                <div class="card" id="companyCard">
+                    <h2 class="card-title">🎯 Company Selection Chances</h2>
+                    <p class="card-sub">Where you have the best chances of getting selected based on your resume</p>
+                    <div class="tier-filters" id="tierFilters">
+                        <button class="tier-btn active" data-tier="all">All Companies</button>
+                        <button class="tier-btn" data-tier="1">Tier 1 (FAANG+)</button>
+                        <button class="tier-btn" data-tier="2">Tier 2 (Major)</button>
+                        <button class="tier-btn" data-tier="3">Tier 3 (Growth)</button>
+                    </div>
+                    <div class="company-list" id="companyList"></div>
+                </div>
+
+                <!-- Weak Areas -->
+                <div class="card" id="weakCard">
+                    <h2 class="card-title">⚠️ Weak Areas to Improve</h2>
+                    <div class="weak-list" id="weakList"></div>
+                </div>
+
+                <!-- Strong Areas -->
+                <div class="card" id="strongCard">
+                    <h2 class="card-title">💪 Your Strengths</h2>
+                    <div class="strong-list" id="strongList"></div>
+                </div>
+
+                <!-- Skills Detail -->
+                <div class="card" id="skillsCard">
+                    <h2 class="card-title">🛠️ Skills Analysis</h2>
+                    <div class="skills-sections" id="skillsSections"></div>
+                </div>
+
+                <!-- Suggestions -->
+                <div class="card" id="suggestionsCard">
+                    <h2 class="card-title">💡 Recommendations</h2>
+                    <div class="suggestions-list" id="suggestionsList"></div>
+                </div>
+
+                <button class="btn-secondary" id="newAnalysis">↻ Analyse Another Resume</button>
+            </section>
+
+            <!-- Error -->
+            <div class="card error-card" id="errorCard" style="display:none">
+                <h3>❌ Analysis Failed</h3>
+                <p id="errorMsg"></p>
+                <button class="btn-secondary" id="retryBtn">Try Again</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Built with ❤️ • AI Resume Analyser Pro</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
